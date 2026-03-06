@@ -1,92 +1,90 @@
 # 🚀 Windows Startup Automation
 
-Automação para preparação do ambiente de trabalho em máquinas Windows.
+Automation for preparing the work environment on Windows machines.
 
-Este projeto automatiza tarefas comuns realizadas após o login do usuário, garantindo que serviços do sistema estejam ativos e aplicações educacionais específicas sejam abertas automaticamente em modo tela cheia.
+This project automates common tasks performed after user login, ensuring system services are running and specific educational applications are launched automatically in fullscreen mode.
 
-O objetivo é reduzir intervenção manual e padronizar o ambiente de uso em computadores compartilhados (por exemplo, laboratórios ou salas de aula).
+The goal is to reduce manual intervention and standardize the usage environment on shared computers (e.g., labs or classrooms).
 
 ---
 
-# ✨ Funcionalidades
+# ✨ Features
 
 ### 🔧 Hardware Sync
-Garante que as teclas de estado estejam corretamente configuradas:
+Ensures keyboard state keys are correctly configured:
 
-- Ativa **Caps Lock** caso esteja desligado
-- Ativa **Num Lock** caso esteja desligado
+- Enables **Caps Lock** if it is off
+- Enables **Num Lock** if it is off
 
 ---
 
 ### 📡 Service Management
-Verifica e inicia automaticamente o serviço de **Bluetooth** (`bthserv`) utilizando PowerShell.
+Automatically checks and starts the **Bluetooth** service (`bthserv`) using PowerShell.
 
 ---
 
-### 🖥️ Automação de Aplicações
+### 🖥️ Application Automation
 
-O sistema detecta automaticamente atalhos na área de trabalho e executa:
+The system automatically detects desktop shortcuts and launches:
 
 - **Matific**
 - **Elefante Letrado**
 
-Características:
+Features:
 
-- Detecção **case-insensitive**
-- Busca flexível baseada em **regex**
-- Não depende do nome exato do atalho
+- **Case-insensitive** detection
+- Flexible matching based on **regex**
+- Does not depend on the exact shortcut name
 
-Exemplos suportados:
+Supported examples:
 
 ```
-
 Matific.lnk
 MATIFIC Escola.lnk
 Login - Elefante Letrado.lnk
 Elefante.lnk
-
-````
+```
 
 ---
 
-### 🪟 Orquestração de Janelas
+### 🪟 Window Orchestration
 
-Após abrir os programas:
+After launching the programs:
 
-- Aguarda o carregamento da janela
-- Coloca o aplicativo em **modo tela cheia (F11)**
-- Minimiza o primeiro app para permitir alternância suave entre aplicações
+- Waits for the window to load
+- Puts the application in **fullscreen mode (F11)**
+- Minimizes the first app to allow smooth switching between applications
 
 ---
 
 ### ⏱️ Boot Stabilization
 
-Inclui um **delay inicial preventivo** para evitar conflitos com serviços ainda carregando durante o login do Windows.
+Includes a **preventive initial delay** to avoid conflicts with services still loading during Windows login.
 
 ---
 
-# 🛠️ Tecnologias Utilizadas
+# 🛠️ Technologies Used
 
 - **Python**
-- **PyAutoGUI** — automação de teclado
-- **PyGetWindow** — manipulação de janelas
-- **Win32 API (ctypes)** — verificação de estados de teclado
-- **Subprocess / OS** — execução de comandos do sistema
+- **PyAutoGUI** — keyboard automation
+- **PyGetWindow** — window management
+- **Win32 API (ctypes)** — keyboard state detection
+- **Subprocess / OS** — system command execution
 
 ---
 
-# 📦 Instalação para Desenvolvimento
+# 📦 Development Setup
 
-## 1. Clonar o repositório
+## 1. Clone the repository
 
 ```bash
-git clone https://github.com/seu-usuario/windows-startup-automation.git
+git clone https://github.com/your-username/windows-startup-automation.git
 cd windows-startup-automation
-````
+```
 
 ---
 
-## 2. Criar ambiente virtual
+## 2. Create a virtual environment
 
 ```bash
 python -m venv venv
@@ -95,7 +93,7 @@ venv\Scripts\activate
 
 ---
 
-## 3. Instalar dependências
+## 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -103,31 +101,31 @@ pip install -r requirements.txt
 
 ---
 
-# 🔨 Gerando o Executável (.exe)
+# 🔨 Building the Executable (.exe)
 
-Para distribuição em máquinas sem Python instalado utilizamos **PyInstaller**.
+For distribution on machines without Python installed, we use **PyInstaller**.
 
-Instale o PyInstaller:
+Install PyInstaller:
 
 ```bash
 pip install pyinstaller
 ```
 
-Gerar executável:
+Build the executable:
 
 ```bash
 pyinstaller --onefile --noconsole startup.py
 ```
 
-Após o build:
+After the build:
 
-* O executável estará em:
+- The executable will be located at:
 
 ```
 dist/startup.exe
 ```
 
-Arquivos temporários podem ser removidos:
+Temporary files can be removed:
 
 ```powershell
 Remove-Item -Recurse -Force build, *.spec
@@ -135,29 +133,29 @@ Remove-Item -Recurse -Force build, *.spec
 
 ---
 
-# 🚀 Executando automaticamente no Windows
+# 🚀 Running Automatically on Windows
 
-Para rodar o script automaticamente ao iniciar o computador:
+To run the script automatically at startup:
 
-1. Pressione **Win + R**
-2. Digite:
+1. Press **Win + R**
+2. Type:
 
 ```
 shell:startup
 ```
 
-3. Coloque o arquivo **startup.exe** (ou um atalho para ele) nesta pasta.
+3. Place the **startup.exe** file (or a shortcut to it) in this folder.
 
-O script será executado automaticamente após o login do usuário.
+The script will run automatically after user login.
 
 ---
 
-# ⚠️ Observações
+# ⚠️ Notes
 
-* Os atalhos das aplicações devem estar na **Área de Trabalho do usuário**
-* O Windows pode exibir um alerta **SmartScreen** ao executar o `.exe`
+- Application shortcuts must be on the **user's Desktop**
+- Windows may display a **SmartScreen** warning when running the `.exe`
 
-Para continuar:
+To proceed:
 
 ```
 More info → Run anyway
@@ -165,7 +163,7 @@ More info → Run anyway
 
 ---
 
-# 📂 Estrutura do Repositório
+# 📂 Repository Structure
 
 ```
 .
@@ -177,80 +175,72 @@ More info → Run anyway
 
 ---
 
-# 📜 Licença
+# 📜 License
 
-Projeto distribuído para fins educacionais e de automação de ambiente Windows.
-
-```
+Project distributed for educational and Windows environment automation purposes.
 
 ---
 
-# Descrição da Release (GitHub)
+# Release Description (GitHub)
 
-Título da release:
+Release title:
 
 ```
-
 v1.0.0 - Initial Release
+```
 
-````
-
-Descrição:
+Description:
 
 ```markdown
 ## Windows Startup Automation v1.0.0
 
-Primeira versão estável da ferramenta de automação de inicialização para Windows.
+First stable release of the Windows startup automation tool.
 
-Este executável automatiza a preparação do ambiente de trabalho após o login do usuário, garantindo que periféricos e serviços estejam ativos e que aplicações educacionais sejam abertas automaticamente em tela cheia.
+This executable automates the preparation of the work environment after user login, ensuring peripherals and services are active and educational applications are launched automatically in fullscreen.
 
 ---
 
-## Funcionalidades
+## Features
 
-- Ativa automaticamente **Caps Lock** e **Num Lock**
-- Inicia o serviço **Bluetooth (bthserv)**
-- Detecta e abre automaticamente os aplicativos:
+- Automatically enables **Caps Lock** and **Num Lock**
+- Starts the **Bluetooth service (bthserv)**
+- Automatically detects and opens:
   - Matific
   - Elefante Letrado
-- Busca de atalhos baseada em **regex** (não depende do nome exato)
-- Coloca os aplicativos em **modo tela cheia**
-- Gerencia foco e minimização de janelas
-- Delay inicial para evitar conflitos durante o boot
+- Shortcut detection based on **regex** (does not require exact names)
+- Launches applications in **fullscreen mode**
+- Manages window focus and minimization
+- Initial delay to prevent conflicts during boot
 
 ---
 
-## Como usar
+## How to Use
 
-1. Baixe `startup.exe`
-2. Execute o arquivo
-3. Para execução automática, coloque o executável em:
+1. Download `startup.exe`
+2. Run the file
+3. For automatic startup, place the executable in:
 
-````
-
+```
 shell:startup
-
 ```
 
 ---
 
-## Requisitos
+## Requirements
 
-- Windows 10 ou superior
+- Windows 10 or higher
 
-Python **não é necessário** para executar o programa.
+Python is **not required** to run the program.
 
 ---
 
-## Observação
+## Note
 
-O Windows pode exibir um aviso do **SmartScreen** porque o executável não é assinado digitalmente.
+Windows may show a **SmartScreen** warning because the executable is not digitally signed.
 
-Clique:
+Click:
 
 ```
-
 More info → Run anyway
-
 ```
 ```
