@@ -4,6 +4,7 @@ import os
 import time
 import pyautogui
 import pygetwindow as gw
+import re
 
 
 def is_capslock_on():
@@ -35,20 +36,33 @@ def enable_bluetooth():
         pass
 
 
+def find_shortcut(folder, pattern):
+    regex = re.compile(pattern, re.IGNORECASE)
+
+    for file in os.listdir(folder):
+        if file.endswith(".lnk") and regex.search(file):
+            return os.path.join(folder, file)
+
+    return None
+
+
 def open_shortcut(path):
-    os.startfile(path)
+    if path:
+        os.startfile(path)
 
 
-def wait_window(title_part, timeout=30):
+def wait_window(title_pattern, timeout=30):
+    regex = re.compile(title_pattern, re.IGNORECASE)
     start = time.time()
 
     while time.time() - start < timeout:
-        windows = gw.getWindowsWithTitle(title_part)
+        windows = gw.getAllTitles()
 
-        if windows:
-            window = windows[0]
-            window.activate()
-            return window
+        for title in windows:
+            if regex.search(title):
+                window = gw.getWindowsWithTitle(title)[0]
+                window.activate()
+                return window
 
         time.sleep(1)
 
@@ -63,16 +77,20 @@ def fullscreen():
 def minimize(window):
     window.minimize()
 
+
 time.sleep(15)
+
 desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-matific = os.path.join(desktop, "Matific.lnk")
-elefante = os.path.join(desktop, "Elefante Letrado Login.lnk")
+
+matific = find_shortcut(desktop, r"matific")
+elefante = find_shortcut(desktop, r"elefante")
 
 ensure_capslock()
 ensure_numlock()
 enable_bluetooth()
+
 open_shortcut(matific)
-matific_window = wait_window("Matific")
+matific_window = wait_window(r"matific")
 
 if matific_window:
     fullscreen()
@@ -80,7 +98,7 @@ if matific_window:
     minimize(matific_window)
 
 open_shortcut(elefante)
-elefante_window = wait_window("Elefante")
+elefante_window = wait_window(r"elefante")
 
 if elefante_window:
     fullscreen()
