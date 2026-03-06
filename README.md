@@ -172,6 +172,3 @@ More info → Run anyway
 ├── .gitignore
 └── README.md
 ```
-More info → Run anyway
-```
-```
